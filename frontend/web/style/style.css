@@ -1,0 +1,77 @@
+* {
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+}
+
+body {
+    background-color: #f2f3f7 !important;
+}
+
+.bg-primary,
+.btn-primary {
+    background-color: #ff8800 !important;
+}
+
+.btn {
+    font-weight: bold !important;
+}
+
+.btn-primary-border,
+.btn-primary-border:hover,
+.btn-primary-border:active {
+    border: 1px solid #ff8800 !important;
+    color: #ff8800 !important;
+}
+
+.btn-primary:hover {
+    background-color: #ff9c2a !important;
+}
+
+.btn-primary,
+.btn-primary:active,
+.btn-primary:hover {
+    border-color: #ff7002 !important;
+}
+
+.text-primary {
+    color: #ff8800 !important;
+}
+
+input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: #ff8800 !important;
+}
+
+input,
+.text-sm {
+    font-size: 12px !important;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.separator::before,
+.separator::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #ccc;
+}
+
+.separator span {
+    font-size: 14px;
+    color: #666;
+}
+
+.connection-icon {
+    font-size: 60px;
+}
+
+.data-parkir,
+.data-parkir div {
+    font-size: 0.75rem;
+}
