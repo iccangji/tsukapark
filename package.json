@@ -2,13 +2,13 @@
   "name": "auth-node-mysql",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "backend/src/index.js",
   "scripts": {
-    "start": "nodemon src/index.js",
+    "start": "nodemon backend/src/index.js",
     "start:dev": "nodemon",
-    "db:up": "node src/database/scripts/dbUp.js",
-    "db:down": "node src/database/scripts/dbDown.js",
-    "tables:up": "node src/database/scripts/tablesUp.js",
+    "db:up": "node backend/src/database/scripts/dbUp.js",
+    "db:down": "node backend/src/database/scripts/dbDown.js",
+    "tables:up": "node backend/src/database/scripts/tablesUp.js",
     "db:init": "npm run db:up && npm run tables:up"
   },
   "keywords": [],

@@ -79,7 +79,6 @@ ws.onmessage = (event) => {
         park1.classList.add("btn-danger");
         parkStatus1.textContent = "Kosong"
     }
-    parkStatus1.textContent += wsData['order']['park1'] ? " (Dipesan)" : ""
 
     if (wsData['sensor']['park2']) {
         park2.classList.remove("btn-danger");
@@ -90,7 +89,6 @@ ws.onmessage = (event) => {
         park2.classList.add("btn-danger");
         parkStatus2.textContent = "Kosong"
     }
-    parkStatus2.textContent += wsData['order']['park2'] ? " (Dipesan)" : ""
 
     if (wsData['sensor']['park3']) {
         park3.classList.remove("btn-danger");
@@ -101,7 +99,6 @@ ws.onmessage = (event) => {
         park3.classList.add("btn-danger");
         parkStatus3.textContent = "Kosong"
     }
-    parkStatus3.textContent += wsData['order']['park3'] ? " (Dipesan)" : ""
 
     if (wsData['sensor']['park4']) {
         park4.classList.remove("btn-danger");
@@ -112,7 +109,6 @@ ws.onmessage = (event) => {
         park4.classList.add("btn-danger");
         parkStatus4.textContent = "Kosong"
     }
-    parkStatus4.textContent += wsData['order']['park4'] ? " (Dipesan)" : ""
 
     if (wsData['sensor']['park5']) {
         park5.classList.remove("btn-danger");
@@ -123,7 +119,6 @@ ws.onmessage = (event) => {
         park5.classList.add("btn-danger");
         parkStatus5.textContent = "Kosong"
     }
-    parkStatus5.textContent += wsData['order']['park5'] ? " (Dipesan)" : ""
 
     if (wsData['sensor']['park6']) {
         park6.classList.remove("btn-danger");
@@ -134,7 +129,6 @@ ws.onmessage = (event) => {
         park6.classList.add("btn-danger");
         parkStatus6.textContent = "Kosong"
     }
-    parkStatus6.textContent += wsData['order']['park6'] ? " (Dipesan)" : ""
 
 
 };

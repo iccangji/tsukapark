@@ -48,6 +48,15 @@ class MainViewModel(
 
     private val _emailState = MutableStateFlow("")
 
+    private val orderList = listOf(
+        "park1",
+        "park4",
+        "park2",
+        "park5",
+        "park3",
+        "park6",
+    )
+
     private val webSocket = WebSocketManager()
     private val listener = object : WebSocketListener() {
         override fun onOpen(webSocket: WebSocket, response: Response) {
@@ -127,13 +136,13 @@ class MainViewModel(
         }
     }
 
-    fun setPark(label: String, checkin: Boolean) {
+    fun setPark(label: Int, checkin: Boolean) {
         viewModelScope.launch {
             val email = getEmail()
             webSocket.sendMessage(
                 """
                     {
-                        "park": "$label",
+                        "park": "${orderList[label]}",
                         "email": "$email",
                         "checkin": $checkin
                     }

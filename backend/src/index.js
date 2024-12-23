@@ -2,6 +2,7 @@ const app = require('./app');
 const { logger } = require('./utils/logger');
 const { setupWebSocketServer } = require('./config/ws.config');
 const { setupMqttClient, publishMqttClient } = require('./config/mqtt.client');
+const { default: mqtt } = require('mqtt');
 
 const HOSTNAME = '0.0.0.0';
 const PORT = process.env.PORT || 3000;
@@ -27,8 +28,17 @@ wss.on('connection', (ws) => {
         console.log(`Checkin message: ${message}`);
         const data = JSON.parse(message);
         orderData[data.park] = (data.checkin == true) ? data.email : "";
-        console.log(orderData);
-        publishMqttClient('mqtt://localhost', 'order/data', orderData)
+        // console.log(orderData);
+
+        let orderDataMqtt = {};
+        let counter = 1;
+        for (let key in orderData) {
+            orderDataMqtt[`order${counter}`] = orderData[key] != "";
+            counter++;
+        }
+
+        console.log(orderDataMqtt);
+        publishMqttClient('mqtt://localhost', 'order/data', orderDataMqtt);
     });
 
     setTimeout(() => {
@@ -38,12 +48,26 @@ wss.on('connection', (ws) => {
 
 });
 
+function transpose(data) {
+    let dataTransposed = {};
+    const newOrder = ["park1", "park3", "park5", "park2", "park4", "park6"];
+    const keys = Object.keys(data);
+    newOrder.forEach((key, index) => {
+        if (index < keys.length) {
+            dataTransposed[key] = data[keys[index]];
+        }
+    });
+
+    return dataTransposed;
+}
 setupMqttClient('mqtt://localhost', ['sensor/data', 'order/data'], (topic, data) => {
     if (topic == 'sensor/data') {
-        mqttData = data;
+        // mqttData = data;
+        mqttData = transpose(data);
+        // console.log(mqttData);
         broadcastMqttData(topic, mqttData);
     }
     else {
-        broadcastMqttData(topic, orderData);
+        broadcastMqttData(topic, transpose(orderData));
     }
 });

@@ -42,6 +42,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.icang.tsukapark.R
 import com.icang.tsukapark.data.network.ParkUiState
@@ -234,7 +235,7 @@ fun MainScreen(
                         onDismissRequest = { checkoutDialogState.value = false },
                         onConfirmation = {
                             checkoutDialogState.value = false
-                            mainViewModel.setPark("park${slotIndexState.value+1}", false)
+                            mainViewModel.setPark(slotIndexState.value, false)
 //                            checkinState.value = true
 //                            slotState.toMutableList().apply {
 //                                this[slotIndexState.value].isFilled = false
@@ -255,7 +256,7 @@ fun MainScreen(
 //                                this[slotIndexState.value].isFilled = true
 //                            }
                             mainViewModel.setPark(
-                                "park${slotIndexState.value+1}", true
+                                slotIndexState.value, true
                             )
                         },
                         confirmationText = "Checkin",
@@ -307,8 +308,7 @@ fun ParkingSlot(
 ){
     Button(
         modifier = Modifier
-            .padding(8.dp)
-            .size(80.dp),
+            .size(72.dp),
         onClick = {
             if (!isFilled) {
                 onClick()
@@ -330,7 +330,8 @@ fun ParkingSlot(
                     color = Color.White,
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Bold
-                )
+                ),
+                fontSize = 12.sp
             )
         }
     }
