@@ -47,7 +47,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.icang.tsukapark.R
 import com.icang.tsukapark.data.network.ParkUiState
 import com.icang.tsukapark.data.network.Slot
-import com.icang.tsukapark.data.network.UiState
 import com.icang.tsukapark.ui.theme.AppTheme
 
 
@@ -70,12 +69,12 @@ fun MainScreen(
     val slotIndexState = remember { mutableStateOf(0) }
     val slotState = remember{
         mutableStateListOf(
-            Slot("L1", false),
-            Slot("R1", false),
-            Slot("L2", false),
-            Slot("R2", false),
-            Slot("L3", false),
-            Slot("R3", false),
+            Slot("L1", false, "Barat Lobi Blok L No. 1"),
+            Slot("R1", false, "Timur Lobi Blok R No. 1"),
+            Slot("L2", false, "Barat Lobi Blok L No. 2"),
+            Slot("R2", false, "Timur Lobi Blok R No. 2"),
+            Slot("L3", false, "Barat Lobi Blok L No. 3"),
+            Slot("R3", false, "Timur Lobi Blok R No. 3"),
         )
     }
 
@@ -89,8 +88,10 @@ fun MainScreen(
     }
 
     if (userCheckinState != 0){
+//    if (true){
         checkinState.value = false
         slotIndexState.value = userCheckinState - 1
+//        slotIndexState.value = 2 - 1
     }else{
         checkinState.value = true
     }
@@ -225,7 +226,8 @@ fun MainScreen(
                     checkoutClick = {
                         checkoutDialogState.value = true
                     },
-                    label = slotState[slotIndexState.value].label
+                    label = slotState[slotIndexState.value].label,
+                    location = slotState[slotIndexState.value].location
                 )
             }
 
@@ -341,6 +343,7 @@ fun ParkingSlot(
 @Composable
 fun ReservationStatusCard(
     checkoutClick: () -> Unit,
+    location: String,
     label: String
 ){
     OutlinedCard(
@@ -349,25 +352,30 @@ fun ReservationStatusCard(
             containerColor = Color.Transparent
         )
     ) {
-        Row(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+            verticalArrangement = Arrangement.SpaceBetween,
+            horizontalAlignment = Alignment.Start
         ) {
             Text(
                 text = "Parkiran yang dipesan: $label",
-                style = MaterialTheme.typography.bodyLarge
+                style = MaterialTheme.typography.bodySmall
+            )
+            Text(
+                text = "Terletak di $location",
+                style = MaterialTheme.typography.bodySmall
             )
             Button(
+                modifier = Modifier.padding(top = 16.dp),
                 onClick = checkoutClick,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.primary,
                     contentColor = MaterialTheme.colorScheme.onPrimary
                 )
             ) {
-                Text(text = "Check-out")
+                Text(text = "Check-out", style = MaterialTheme.typography.bodySmall)
             }
         }
     }

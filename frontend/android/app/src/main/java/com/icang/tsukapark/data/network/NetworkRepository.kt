@@ -44,7 +44,7 @@ sealed class UiState<out T> {
     data object Initial : UiState<Nothing>()
 }
 
-data class Slot(val label: String, var isFilled: Boolean)
+data class Slot(val label: String, var isFilled: Boolean, val location: String)
 
 sealed class ParkUiState<out T> {
     data class Success<T>(val data: T) : ParkUiState<T>()

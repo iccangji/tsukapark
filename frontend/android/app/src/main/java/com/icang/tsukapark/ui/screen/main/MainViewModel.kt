@@ -9,8 +9,6 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.icang.tsukapark.TsukaparkApplication
 import com.icang.tsukapark.data.local.LocalRepository
-import com.icang.tsukapark.data.model.OrderData
-import com.icang.tsukapark.data.model.OrderResponse
 import com.icang.tsukapark.data.network.NetworkRepository
 import com.icang.tsukapark.data.network.ParkUiState
 import com.icang.tsukapark.data.network.Slot
@@ -18,15 +16,12 @@ import com.icang.tsukapark.data.network.WebSocketManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.TimeoutCancellationException
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
 import okhttp3.Response
 import okhttp3.WebSocket
@@ -72,12 +67,12 @@ class MainViewModel(
                     "sensor/data" -> {
                         _parkUiState.value = ParkUiState.Success(
                             listOf(
-                                Slot("L1", result.data.park1.toBoolean()),
-                                Slot("R1", result.data.park2.toBoolean()),
-                                Slot("L2", result.data.park3.toBoolean()),
-                                Slot("R2", result.data.park4.toBoolean()),
-                                Slot("L3", result.data.park5.toBoolean()),
-                                Slot("R3", result.data.park6.toBoolean()),
+                                Slot("L1", result.data.park1.toBoolean(), "Barat Lobi Blok L No. 1"),
+                                Slot("R1", result.data.park2.toBoolean(), "Timur Lobi Blok R No. 1"),
+                                Slot("L2", result.data.park3.toBoolean(), "Barat Lobi Blok L No. 2"),
+                                Slot("R2", result.data.park4.toBoolean(), "Timur Lobi Blok R No. 2"),
+                                Slot("L3", result.data.park5.toBoolean(), "Barat Lobi Blok L No. 3"),
+                                Slot("R3", result.data.park6.toBoolean(), "Timur Lobi Blok R No. 3"),
                             )
                         )
                     }

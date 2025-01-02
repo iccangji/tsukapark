@@ -16,6 +16,7 @@ const setupMqttClient = (brokerUrl, topic, callback) => {
         try {
             const mqttData = JSON.parse(message.toString());
             console.log('MQTT data has received!');
+            console.log(mqttData);
             callback(topic, mqttData);
         } catch (err) {
             console.error('Error parsing MQTT message:', err.message);
